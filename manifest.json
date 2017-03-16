@@ -1,0 +1,20 @@
+{
+
+  "manifest_version": 2,
+  "name": "SalesforceProductionWarning",
+  "version": "1.0",
+
+  "description": "Add a red border on Screen to notify the environment that be operating is Production!",
+
+  "icons": {
+    "48": "icons/favicon.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.salesforce.com/*"],
+      "js": ["border.js"]
+    }
+  ]
+
+}

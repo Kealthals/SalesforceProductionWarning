@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "SalesforceProductionWarning",
-  "version": "1.0",
+  "version": "1.1",
 
   "description": "Add a red border on Screen to notify the environment that be operating is Production!",
 

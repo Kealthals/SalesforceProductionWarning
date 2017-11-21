@@ -4,7 +4,7 @@ if(isProduction(window.location.host)) {
 
 function isSandbox(s){
 //var regu =/https:\/\/.*cs[0-9]{1,2}\.(my\.)*salesforce\.com/g;
-var regu =/https:\/\/.*cs[0-9]{1,3}\.(my\.)*salesforce\.com/g;
+var regu =/https:\/\/.*cs[0-9]{1,3}\.(my\.)(salesforce|visual\.force)\.com/g;
 var re = new RegExp(regu);
 if (re.test(s)) {
         return true;
@@ -14,7 +14,7 @@ if (re.test(s)) {
 }
 function isProduction(s){
 //var regu =/https:\/\/.*cs[0-9]{1,2}\.(my\.)*salesforce\.com/g;
-var regu =/(login\.|(ap|na|eu)[0-9]{1,3}\.|.*[^(cs)][^0-9]{1,3}\.my\.)salesforce\.com/g;
+var regu =/(login\.|(ap|na|eu)[0-9]{1,3}\.|.*[^(cs)][^0-9]{1,3}\.my\.)(salesforce|visual\.force)\.com/g;
 var re = new RegExp(regu);
 if (re.test(s)) {
         return true;

@@ -20,7 +20,7 @@ function setCurrentChoice(result) {
 			if(color == "") {
 				color = "white";
 			}
-			document.querySelector("#p" + element.no).innerHTML = "<strong>" + pattern + "</strong>";
+			document.querySelector("#p" + element.no).textContent = pattern;
 			document.querySelector("#p" + element.no).style = "margin: 1px; background:linear-gradient(to left, " + color + ", #f8f6f2);"
 		});
 	}

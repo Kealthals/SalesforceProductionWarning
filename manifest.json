@@ -7,7 +7,7 @@
   "description": "Add a border on Screen to notify the environment that be operating is Production!",
 
   "icons": {
-    "48": "icons/favicon.png"
+    "16": "icons/favicon.png"
   },
 
   "content_scripts": [
@@ -16,7 +16,12 @@
       "js": ["border.js"]
     }
   ],
-  
+ "applications": {
+  "gecko": {
+    "id": "{672023cc-1811-46f3-9681-8e1ed7b04217}",
+    "strict_min_version": "42.0"
+  }
+},
   "browser_action": {
 	
 	"default_icon":"icons/favicon.png",

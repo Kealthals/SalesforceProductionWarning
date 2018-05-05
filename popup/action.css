@@ -1,0 +1,70 @@
+body {
+  min-width: 250px;
+  margin: 0px;
+  font-family: Segoe UI, Arial, sans-serif;
+  font-size: 13px;
+  color: #545454;
+  background-color: #f8f6f2;
+}
+header
+{
+  height: 30px;
+  border-bottom: 1px solid #e1ddd8;
+  background-color: #f8f6f2;
+  border-bottom: 1px dashed #a5a4a1;
+}
+#header {
+  font-size: 18px;
+  text-align: center;
+}
+footer
+{
+  cursor: pointer;
+  padding: 10px 35px;
+  border-top: 1px dashed #a5a4a1;
+  background-color: #f8f6f2;
+  text-align: center;
+}
+label
+{
+  vertical-align: middle;
+}
+#noList {
+  border: 1px solid black;
+  margin: 1px;
+  background-color:white;
+}
+.disabled {
+  display: none;
+}
+footer:hover
+{
+  background: -moz-linear-gradient(top, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
+    url(background-main.png);
+  background: -webkit-linear-gradient(top, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
+    url(background-main.png);
+  background: linear-gradient(to bottom, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
+    url(background-main.png);
+}
+
+button {
+  text-align: center;
+  cursor: pointer;
+}
+
+.reset {
+  background-color: #FBFBC9;
+}
+
+button:hover {
+  background-color: #EAEA9D;
+}
+
+span {
+	width: 50px;
+}
+
+.pattern {
+  width: 250px;
+  font-size: 15px;  
+}

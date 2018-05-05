@@ -1,6 +1,5 @@
 "use strict";
 if (isProduction(window.location.host)) {
-	//document.body.style.border = "5px solid red";
 	var getting = browser.storage.local.get("urls");
 	getting.then(onGot, onError);
 }
@@ -9,9 +8,8 @@ function onError(error) {
 }
 
 function onGot(item) {
-
 	if (item.urls == undefined || item.urls == null || JSON.stringify(item) === "{}") {
-		addBorder();
+		setBorder("", window.location.host.substring(0, window.location.host.indexOf(".")));
 
 	} else {
 		var flg = false;
@@ -52,7 +50,6 @@ function addBorder(type, color) {
 
 	if (type === "lightning") {
 		if (document.querySelector("#SalesforceProductionWarningLeftBar") != null) {
-			console.log("remove");
 			var leftBarObj = document.querySelector("#SalesforceProductionWarningLeftBar");
 			leftBarObj.parentNode.removeChild(leftBarObj);
 			var rightBarObj = document.querySelector("#SalesforceProductionWarningRightBar");

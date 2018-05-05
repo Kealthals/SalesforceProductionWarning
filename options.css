@@ -1,0 +1,23 @@
+body {
+    background-color: #F3F3F3;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+    margin: 1rem 0.3rem;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 1rem;
+    line-height: 1.3rem;
+    color: #4A4A4A;
+}
+header {
+    text-align: center;
+    font-size: 24px;
+    height: 100px;
+}
+header div {
+    margin-top: 50px;
+}
+.pattern {
+    max-width: 300px;
+    width : 300px;
+}

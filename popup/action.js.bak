@@ -5,8 +5,7 @@ function onError(error) {
 
 function setCurrentChoice(result) {
 	if(result == undefined || result == null || JSON.stringify(result) === "{}") {
-		//document.querySelector("#panel").innerHTML = "<div style='border: 1px solid black;margin: 1px; background-color:white;'>No patterns.</div>";
-		document.querySelector("#noList").classList.toggle("disabled");
+		document.querySelector("#panel").innerHTML = "<div style='border: 1px solid black;margin: 1px; background-color:white;'>No patterns.</div>";
 	} else {
 		var records = result.urls;
 		records.forEach(function(element) {
@@ -20,14 +19,14 @@ function setCurrentChoice(result) {
 			if(color == "") {
 				color = "white";
 			}
-			document.querySelector("#p" + element.no).innerHTML = "<strong>" + pattern + "</strong>";
-			document.querySelector("#p" + element.no).style = "margin: 1px; background:linear-gradient(to left, " + color + ", #f8f6f2);"
+			document.querySelector("#p" + element.no).innerHTML = pattern;
+			document.querySelector("#p" + element.no).style = "border: 1px solid black;margin: 1px; background-color:" + color;
 		});
 	}
 }
 var getting = browser.storage.local.get("urls");
 getting.then(setCurrentChoice, onError);
-document.querySelector("#options").addEventListener("click", JumpOptions);
+document.querySelector("#EditBtn").addEventListener("click", JumpOptions);
 
 function JumpOptions(e) {
 	e.preventDefault();
@@ -41,5 +40,4 @@ function JumpOptions(e) {
 
 	var opening = browser.runtime.openOptionsPage();
 	opening.then(onOpened, onError);
-	window.close();
 }

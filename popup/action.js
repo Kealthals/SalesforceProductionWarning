@@ -4,21 +4,24 @@ function onError(error) {
 }
 
 function setCurrentChoice(result) {
-	if(result == undefined || result == null || JSON.stringify(result) === "{}") {
-		//document.querySelector("#panel").innerHTML = "<div style='border: 1px solid black;margin: 1px; background-color:white;'>No patterns.</div>";
+	if (result == undefined || result == null || JSON.stringify(result) === "{}") {
 		document.querySelector("#noList").classList.toggle("disabled");
 	} else {
 		var records = result.urls;
-		records.forEach(function(element) {
+		records.forEach(function (element) {
 			var pattern = element.pattern;
 			var color = element.color;
-			if(pattern == "------") {
+			if (pattern == "------") {
 				pattern = "--Default--";
-			} else if(pattern == "") {
+			} else if (pattern == "") {
 				pattern = "--None--";
 			}
-			if(color == "") {
-				color = "white";
+			if (color == "") {
+				if (pattern === "--None--") {
+					color = "white";
+				} else {
+					color = records[0].color;
+				}
 			}
 			document.querySelector("#p" + element.no).textContent = pattern;
 			document.querySelector("#p" + element.no).style = "margin: 1px; background:linear-gradient(to left, " + color + ", #f8f6f2);"

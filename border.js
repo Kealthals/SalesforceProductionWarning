@@ -1,5 +1,5 @@
 "use strict";
-if (isProduction(window.location.host)) {
+if (isSalesforce(window.location.host)) {
 	var getting = browser.storage.local.get("urls");
 	getting.then(onGot, onError);
 }
@@ -17,7 +17,7 @@ function onGot(item) {
 		var records = item.urls;
 
 		records.forEach(function (element) {
-			if (setBorder(element.color, element.pattern)) {
+			if (setBorder(element.color, element.pattern, records[0].color, element.sandbox)) {
 				flg = true;
 			}
 		});
@@ -29,7 +29,7 @@ function onGot(item) {
 
 }
 
-function setBorder(color, pattern) {
+function setBorder(color, pattern, defaultColor, sandbox) {
 	if (pattern != "" &&
 		(window.location.host.substring(0, window.location.host.indexOf(".")) == pattern
 			|| window.location.host.substring(0, window.location.host.indexOf("--")) == pattern)) {
@@ -37,15 +37,22 @@ function setBorder(color, pattern) {
 		if (window.location.host.indexOf(".lightning.") > 0) {
 			type = "lightning";
 		}
-		addBorder(type, color);
+		console.log(sandbox);
+		if(isProduction(window.location.host) || sandbox === true) {
+			addBorder(type, color, defaultColor);
+		}
 		return true;
 	}
 	return false;
 }
 
-function addBorder(type, color) {
+function addBorder(type, color, defaultColor) {
 	if (color === "" || color === undefined || color === null) {
-		color = "red";
+		if(defaultColor === "" || defaultColor === undefined || defaultColor === null) {
+			color = "red";
+		} else {
+			color = defaultColor;
+		}
 	}
 
 	if (type === "lightning") {
@@ -89,8 +96,16 @@ function addBorder(type, color) {
 
 }
 function isProduction(s) {
-	//var regu =/https:\/\/.*cs[0-9]{1,2}\.(my\.)*salesforce\.com/g;
-	var regu = /((login|(ap|na|eu)[0-9]{1,3}|.*[^(cs)][^0-9]{1,3})\.lightning\.force\.com|(login\.|(ap|na|eu)[0-9]{1,3}\.|.*[^(cs)][^0-9]{1,3}\.my\.)(salesforce|visual\.force)\.com)/g;
+	var regu = /^(?!.*cs).(?!.*--).*\.lightning\.force\.com|(login\.|(ap|na|eu)[0-9]{1,3}\.|.*[^(cs)][^0-9]{1,3}\.my\.)(salesforce|visual\.force)\.com$/g;
+	var re = new RegExp(regu);
+	if (re.test(s)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+function isSalesforce(s) {
+	var regu = /^(.*\.lightning\.force\.com|.*[\.my]?\.(salesforce|visual\.force)\.com)$/g;
 	var re = new RegExp(regu);
 	if (re.test(s)) {
 		return true;

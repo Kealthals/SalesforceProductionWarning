@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "SalesforceProductionWarning",
-  "version": "1.5.1",
+  "version": "1.5.2",
 
   "description": "Add a border on Screen to notify the environment that be operating is Production!",
 

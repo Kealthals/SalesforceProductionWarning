@@ -23,18 +23,18 @@
   }
 },
   "browser_action": {
-	
-	"default_icon":"icons/favicon.png",
-	"default_title": "SPWSettings",
+
+    "default_icon":"icons/favicon.png",
+    "default_title": "SPWSettings",
   "default_popup": "popup/action.html"
-  
+
   },
-  
+
     "options_ui": {
       "page": "options.html",
       "browser_style": true,
       "open_in_tab":true
   },
   "permissions": ["storage"]
-  
+
 }

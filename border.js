@@ -38,7 +38,7 @@ function setBorder(color, pattern, defaultColor, sandbox) {
 			type = "lightning";
 		}
 		console.log(sandbox);
-		if(isProduction(window.location.host) || sandbox === true) {
+		if (isProduction(window.location.host) || sandbox === true) {
 			addBorder(type, color, defaultColor);
 		}
 		return true;
@@ -48,7 +48,7 @@ function setBorder(color, pattern, defaultColor, sandbox) {
 
 function addBorder(type, color, defaultColor) {
 	if (color === "" || color === undefined || color === null) {
-		if(defaultColor === "" || defaultColor === undefined || defaultColor === null) {
+		if (defaultColor === "" || defaultColor === undefined || defaultColor === null) {
 			color = "red";
 		} else {
 			color = defaultColor;
@@ -66,36 +66,30 @@ function addBorder(type, color, defaultColor) {
 	}
 	if (type === "lightning") {
 		var width = document.body.clientWidth > window.innerWidth ? window.innerWidth : document.body.clientWidth;
-		width = width - 5;
-		var height = window.innerHeight - 10;
+        var height = window.innerHeight;
+        width = width - 5;
+        height = height - 5;
 	} else {
 		var width = document.documentElement.clientWidth;
-		width = width - 5;
 		var height = document.documentElement.clientHeight;
-		height = height - 7;
+		width = width - 5;
+		height = height - 5;
 	}
-	var leftbar = document.createElement("DIV");
-	leftbar.id = "SalesforceProductionWarningLeftBar";
-	leftbar.style = "margin:0px;padding:0px;position: fixed;z-index: 100;width: 0px;height:" + height + "px;border:2.5px solid " + color + ";top:0px;left:0px;";
+    var args = "margin:0px;padding:0px;position: fixed;z-index: 100;border:2.5px solid " + color + ";background:" + color;
 
-	document.body.appendChild(leftbar);
-
-	var topbar = document.createElement("DIV");
-	topbar.id = "SalesforceProductionWarningTopBar";
-	topbar.style = "margin:0px;padding:0px;position: fixed;z-index: 100;width:" + width + "px;height:0px;border:2.5px solid " + color + ";top:0px;left:0px;";
-
-	document.body.appendChild(topbar);
-
-	var rightbar = document.createElement("DIV");
-	rightbar.id = "SalesforceProductionWarningRightBar";
-	rightbar.style = "margin:0px;padding:0px;position: fixed;z-index: 100;width: 0px;height:" + height + "px;border:2.5px solid " + color + ";top:0px;left:" + width + "px;";
-	document.body.appendChild(rightbar);
-
-	var buttombar = document.createElement("DIV");
-	buttombar.id = "SalesforceProductionWarningButtomBar";
-	buttombar.style = "margin:0px;padding:0px;position: fixed;z-index: 100;width:" + width + "px;height:0px;border:2.5px solid " + color + ";top:" + height + "px;left:0px;";
-	document.body.appendChild(buttombar);
+    addBar("SalesforceProductionWarningLeftBar", args + ";width: 0px;height:" + height + "px;top:0px;left:0px;");
+    addBar("SalesforceProductionWarningTopBar", args + ";width:" + width + "px;height:0px;top:0px;left:5px;");
+    addBar("SalesforceProductionWarningRightBar", args + ";width: 0px;height:" + height + "px;top:5px;left:" + width + "px;");
+    addBar("SalesforceProductionWarningButtomBar", args + ";width:" + width + "px;height:0px;top:" + height + "px;left:0px;");
 }
+
+function addBar(id, style) {
+    var bar = document.createElement("DIV");
+    bar.id = id;
+    bar.style = style;
+    document.body.appendChild(bar);
+}
+
 function isProduction(s) {
 	var regu = /^(?!.*cs).(?!.*--).*\.lightning\.force\.com|(login\.|(ap|na|eu)[0-9]{1,3}\.|.*[^(cs)][^0-9]{1,3}\.my\.)(salesforce|visual\.force)\.com$/g;
 	var re = new RegExp(regu);

@@ -2,7 +2,7 @@ var num = 7;
 function saveOptions(e) {
 
 	e.preventDefault();
-	document.querySelector("#savebtn").disabled = true;
+	setButtonSaved();
 	var records = { urls: [] };
 	for (var i = 0; i < num; i++) {
 		var record = {
@@ -13,7 +13,7 @@ function saveOptions(e) {
 		};
 		records.urls.push(record);
 	}
-	console.log(records);
+	records.tabIcon = document.querySelector("#tabIcon").value;
 	browser.storage.local.set(records);
 }
 
@@ -32,7 +32,7 @@ function restoreOptions() {
 				};
 				records.urls.push(record);
 			}
-			console.log(records);
+            records.tabIcon = document.querySelector("#tabIcon").value;
 			browser.storage.local.set(records);
 		} else {
 			var records = result.urls;
@@ -41,6 +41,9 @@ function restoreOptions() {
 				document.querySelector("#c" + element.no).value = element.color;
 				document.querySelector("#s" + element.no).checked = element.sandbox;
 			});
+			if(result.tabIcon !== undefined && result.tabIcon !== "") {
+                document.querySelector("#tabIcon").value = result.tabIcon;
+            }
 		}
 	}
 
@@ -48,7 +51,7 @@ function restoreOptions() {
 		console.log(`Error: ${error}`);
 	}
 
-	var getting = browser.storage.local.get("urls");
+	var getting = browser.storage.local.get(["urls", "tabIcon"]);
 	getting.then(setCurrentChoice, onError);
 }
 
@@ -59,17 +62,26 @@ function resetForm() {
 		document.querySelector("#c" + i).value = "";
 		document.querySelector("#s" + i).checked = false;
 	}
-	document.querySelector("#savebtn").disabled = false;
+    document.querySelector("#tabIcon").value = "OFF";
+    setButtonUnSave();
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);
 document.querySelector("form").addEventListener("submit", saveOptions);
 document.querySelector("#resetbtn").addEventListener("click", resetForm);
 for (var i = 0; i < 7; i++) {
-	document.querySelector("#p" + i).addEventListener("input",
-		function () { document.querySelector("#savebtn").disabled = false; });
-	document.querySelector("#c" + i).addEventListener("change",
-		function () { document.querySelector("#savebtn").disabled = false; });
-	document.querySelector("#s" + i).addEventListener("change",
-		function () { document.querySelector("#savebtn").disabled = false; });
+    document.querySelector("#p" + i).addEventListener("input", setButtonUnSave);
+    document.querySelector("#c" + i).addEventListener("change",setButtonUnSave);
+    document.querySelector("#s" + i).addEventListener("change",setButtonUnSave);
+}
+document.querySelector("#tabIcon").addEventListener("change", setButtonUnSave);
+
+function setButtonUnSave() {
+    document.querySelector("#savebtn").disabled = false;
+    document.querySelector("#savebtn").classList.add("btnUnSave");
+}
+
+function setButtonSaved() {
+    document.querySelector("#savebtn").disabled = true;
+    document.querySelector("#savebtn").classList.remove("btnUnSave");
 }

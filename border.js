@@ -143,7 +143,7 @@ function addBar(id, style) {
 }
 
 function isProduction(s) {
-	var regu = /^(?!.*cs\d).(?!.*--).*\.lightning\.force\.com|(^login\.|^(ap|na|eu|um)[0-9]{1,3}\.|^(?!.*cs\d)(?!.*--).*\.my\.)(salesforce|visual\.force|visualforce)\.com$/g;
+	var regu = /^(?!.*cs\d).(?!.*--).*\.lightning\.force\.com|(^login\.|^(ap|na|eu|um|usa|ind)[0-9]{1,3}\.|^(?!.*cs\d)(?!.*--).*\.my\.)(salesforce|visual\.force|visualforce)\.com$/g;
 	var re = new RegExp(regu);
 	if (re.test(s)) {
 		return true;

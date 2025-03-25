@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "SalesforceProductionWarning",
-  "version": "1.5.6",
+  "version": "1.5.7",
 
   "description": "Add a border on Screen to notify the environment that be operating is Production!",
 
@@ -14,7 +14,7 @@
 
   "content_scripts": [
     {
-      "matches": ["*://*.salesforce.com/*","*://*.visual.force.com/*","*://*.lightning.force.com/*","*://*.visualforce.com/*"],
+      "matches": ["*://*.salesforce.com/*","*://*.visual.force.com/*","*://*.lightning.force.com/*","*://*.visualforce.com/*", "*://*.salesforce-setup.com/*"],
       "js": ["border.js"]
     }
   ],
